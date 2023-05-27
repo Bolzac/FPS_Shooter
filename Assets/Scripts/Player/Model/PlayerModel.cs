@@ -27,10 +27,12 @@ public class PlayerModel : MonoBehaviour
     public Health health;
     public Stamina stamina;
     public WeaponVariables weaponVariables;
+    public Impacts impacts;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        impacts.ListToDic();
     }
 }

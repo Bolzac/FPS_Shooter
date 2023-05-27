@@ -18,7 +18,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float fireRate;
     private bool _canFire = true;
-    [SerializeField] private Transform muzzle;
+    [SerializeField] private Sound weaponSound;
+    [SerializeField] private ParticleSystem particle;
 
     // ReSharper disable Unity.PerformanceAnalysis
     public virtual void LeftClickAction(Player player)
@@ -41,15 +42,8 @@ public abstract class Weapon : MonoBehaviour
     {
         if (!_canFire) yield break;
         _canFire = false;
-        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.layerIndex);
-        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit,
-                range))
-        {
-            if (_raycastHit.rigidbody)
-            {
-                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * impactForce,_raycastHit.point,ForceMode.Impulse);
-            }
-        }
+        
+        AnimateAndRaycast(player);
 
         yield return new WaitUntil(() =>
         {
@@ -63,15 +57,8 @@ public abstract class Weapon : MonoBehaviour
     private void AutoFire(Player player)
     {
         if(!_canFire) return;
-        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.layerIndex);
-        Debug.Log("a");
-        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit, range))
-        {
-            if (_raycastHit.rigidbody)
-            {
-                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * impactForce,_raycastHit.point,ForceMode.Impulse);
-            }
-        }
+        
+        AnimateAndRaycast(player);
 
         _canFire = false;
         Invoke(nameof(ResetFire),fireRate);
@@ -80,6 +67,32 @@ public abstract class Weapon : MonoBehaviour
     private void ResetFire()
     {
         _canFire = true;
+    }
+
+    private void CreateAndDesDetectObjectType(Impacts impacts)
+    {
+        Destroy(Instantiate(impacts.ImpactsByName[_raycastHit.transform.tag], _raycastHit.point, Quaternion.LookRotation(_raycastHit.normal)),impacts.impactDuration);
+    }
+
+    private void MakeNoiseOnShot(Player player)
+    {
+        player.playerModel.impacts.source.transform.position = _raycastHit.point;
+        player.soundManager.PlayTargetAudio(player.playerModel.impacts.SoundsByName[_raycastHit.transform.tag],player.playerModel.impacts.source);
+    }
+
+    private void AnimateAndRaycast(Player player)
+    {
+        player.soundManager.PlayTargetAudio(player.playerModel.weaponVariables.currentWeapon.weaponSound,player.playerModel.weaponVariables.source);
+        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.layerIndex);
+        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit, range))
+        {
+            CreateAndDesDetectObjectType(player.playerModel.impacts);
+            MakeNoiseOnShot(player);
+            if (_raycastHit.rigidbody)
+            {
+                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * impactForce,_raycastHit.point,ForceMode.Impulse);
+            }
+        }
     }
 }
 

@@ -8,6 +8,8 @@ TagManager:
   - Metal
   - Carpet
   - Weapon
+  - FxTemporaire
+  - Dirt
   layers:
   - Default
   - TransparentFX

@@ -9,4 +9,6 @@ public class WeaponVariables
     public int maxWeaponAmount;
     public int currentOrder;
     public int swayAmount;
+
+    public AudioSource source;
 }
