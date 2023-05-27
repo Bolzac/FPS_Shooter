@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public InputHandler inputHandler;
     public StateManager stateManager;
     public AudioManager soundManager;
+    public AnimationManager animationManager;
     private void Awake()
     {
         SetCursor();
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
         stateManager = GetComponent<StateManager>();
         playerView = GetComponent<PlayerView>();
         soundManager = GetComponent<AudioManager>();
+        animationManager = GetComponent<AnimationManager>();
     }
 
     private void FixedUpdate()

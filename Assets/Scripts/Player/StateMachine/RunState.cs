@@ -13,6 +13,7 @@ public class RunState  : State<Player>
         base.Enter();
         ChooseAndPlaySound();
         Runner.soundManager.PlayTargetAudio(Array.Find(Runner.playerModel.stamina.sounds, sound => sound.name == "While Running Breathing"),Runner.playerModel.stamina.source);
+        Runner.playerController.WeaponController.HideWeapon();
     }
 
     public override void CaptureInput()
@@ -49,6 +50,7 @@ public class RunState  : State<Player>
     public override void Exit()
     {
         base.Exit();
+        Runner.playerController.WeaponController.DrawWeapon();
         Runner.soundManager.StopTargetSource(Runner.playerModel.movementVariables.movementSource);
         Runner.soundManager.StopTargetSource(Runner.playerModel.stamina.source);
         Runner.playerModel.stamina.isPanting = false;

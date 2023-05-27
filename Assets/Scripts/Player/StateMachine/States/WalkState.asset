@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef1af1d42b5ed74eaa94f532277b309, type: 3}
   m_Name: WalkState
   m_EditorClassIdentifier: 
+  animationName: Walk

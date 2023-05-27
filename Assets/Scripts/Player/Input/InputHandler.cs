@@ -15,6 +15,8 @@ public class InputHandler : MonoBehaviour
     public bool runFlag;
     public bool interactionFlag;
     public bool inventoryToggleFlag;
+    public bool mouseLeftClick;
+    public bool mouseRightClick;
 
     public float scrollWay;
     private void Awake()
@@ -50,6 +52,9 @@ public class InputHandler : MonoBehaviour
         _playerInputs.Actions.InventoryToggle.performed += i => inventoryToggleFlag = !inventoryToggleFlag;
 
         _playerInputs.Actions.Sway.performed += i => scrollWay = i.ReadValue<float>();
+
+        _playerInputs.Actions.Left_Weapon.performed += i => mouseLeftClick = true;
+        _playerInputs.Actions.Left_Weapon.canceled += i => mouseLeftClick = false;
     }
     
     private void OnDisable()

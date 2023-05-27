@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UseWeapon",
+                    "name": "Left_Weapon",
                     "type": "Button",
                     "id": "744a67ad-dcd4-4e0a-bc14-e4918f66c7b5",
                     "expectedControlType": "Button",
@@ -183,7 +183,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UseWeapon",
+                    "action": "Left_Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

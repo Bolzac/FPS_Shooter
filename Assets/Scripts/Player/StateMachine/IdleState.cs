@@ -13,6 +13,7 @@ public class IdleState : State<Player>
     public override void Enter()
     {
         base.Enter();
+        Runner.animationManager.PlayTargetAnimation("Idle",Runner.playerModel.weaponVariables.currentWeapon.layerIndex);
         Runner.StartCoroutine(Runner.soundManager.PlayBreathing());
     }
 
@@ -30,6 +31,8 @@ public class IdleState : State<Player>
             Runner.stateManager.SetState(typeof(CrouchIdleState));
             Runner.StartCoroutine(Runner.playerController.CrouchHandler.Crouch());
         }else if (Runner.inputHandler.interactionFlag) Runner.playerController.InteractionHandler.HandleInteraction();
+        else if(Runner.inputHandler.mouseLeftClick) Runner.playerModel.weaponVariables.currentWeapon.LeftClickAction(Runner);
+        else if(Runner.inputHandler.mouseRightClick) Runner.playerModel.weaponVariables.currentWeapon.RightClickAction(Runner);
     }
 
     public override void Update()

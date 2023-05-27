@@ -64,7 +64,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UseWeapon"",
+                    ""name"": ""Left_Weapon"",
                     ""type"": ""Button"",
                     ""id"": ""744a67ad-dcd4-4e0a-bc14-e4918f66c7b5"",
                     ""expectedControlType"": ""Button"",
@@ -205,7 +205,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""UseWeapon"",
+                    ""action"": ""Left_Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -286,7 +286,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
         m_Actions_Look = m_Actions.FindAction("Look", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
-        m_Actions_UseWeapon = m_Actions.FindAction("UseWeapon", throwIfNotFound: true);
+        m_Actions_Left_Weapon = m_Actions.FindAction("Left_Weapon", throwIfNotFound: true);
         m_Actions_Interaction = m_Actions.FindAction("Interaction", throwIfNotFound: true);
         m_Actions_InventoryToggle = m_Actions.FindAction("InventoryToggle", throwIfNotFound: true);
         m_Actions_Crouch = m_Actions.FindAction("Crouch", throwIfNotFound: true);
@@ -354,7 +354,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Sprint;
     private readonly InputAction m_Actions_Look;
     private readonly InputAction m_Actions_Jump;
-    private readonly InputAction m_Actions_UseWeapon;
+    private readonly InputAction m_Actions_Left_Weapon;
     private readonly InputAction m_Actions_Interaction;
     private readonly InputAction m_Actions_InventoryToggle;
     private readonly InputAction m_Actions_Crouch;
@@ -367,7 +367,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
         public InputAction @Look => m_Wrapper.m_Actions_Look;
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
-        public InputAction @UseWeapon => m_Wrapper.m_Actions_UseWeapon;
+        public InputAction @Left_Weapon => m_Wrapper.m_Actions_Left_Weapon;
         public InputAction @Interaction => m_Wrapper.m_Actions_Interaction;
         public InputAction @InventoryToggle => m_Wrapper.m_Actions_InventoryToggle;
         public InputAction @Crouch => m_Wrapper.m_Actions_Crouch;
@@ -393,9 +393,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnJump;
-                @UseWeapon.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUseWeapon;
-                @UseWeapon.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUseWeapon;
-                @UseWeapon.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnUseWeapon;
+                @Left_Weapon.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnLeft_Weapon;
+                @Left_Weapon.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnLeft_Weapon;
+                @Left_Weapon.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnLeft_Weapon;
                 @Interaction.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteraction;
@@ -424,9 +424,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @UseWeapon.started += instance.OnUseWeapon;
-                @UseWeapon.performed += instance.OnUseWeapon;
-                @UseWeapon.canceled += instance.OnUseWeapon;
+                @Left_Weapon.started += instance.OnLeft_Weapon;
+                @Left_Weapon.performed += instance.OnLeft_Weapon;
+                @Left_Weapon.canceled += instance.OnLeft_Weapon;
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
@@ -449,7 +449,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnUseWeapon(InputAction.CallbackContext context);
+        void OnLeft_Weapon(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnInventoryToggle(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);

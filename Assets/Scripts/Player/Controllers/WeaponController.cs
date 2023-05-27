@@ -23,18 +23,22 @@ public class WeaponController : Handler<Player>
         }
     }
 
-    private void HideWeapon()
+    public void HideWeapon()
     {
         //Animate hide weapon animation for current weapon
-        //Deactivate current weapon
-        runner.playerModel.weaponVariables.weaponRoot.GetChild(runner.playerModel.weaponVariables.currentOrder).gameObject.SetActive(false);
+        runner.animationManager.animator.SetLayerWeight(runner.playerModel.weaponVariables.currentWeapon.layerIndex,0); 
+        runner.playerModel.weaponVariables.currentWeapon.transform.parent.gameObject.SetActive(false);
     }
 
-    private void DrawWeapon()
+    // ReSharper disable Unity.PerformanceAnalysis
+    //Check for performance later
+    public void DrawWeapon()
     {
-        //Activate new order's weapon
+        runner.playerModel.weaponVariables.currentWeapon = runner.playerModel.weaponVariables.weaponRoot
+            .GetChild(runner.playerModel.weaponVariables.currentOrder).GetChild(0).GetComponent<Weapon>();
+        runner.animationManager.animator.SetLayerWeight(runner.playerModel.weaponVariables.currentWeapon.layerIndex,1);
         //Animate draw weapon animation for new order's weapon
-        runner.playerModel.weaponVariables.weaponRoot.GetChild(runner.playerModel.weaponVariables.currentOrder).gameObject.SetActive(true);
+        runner.playerModel.weaponVariables.currentWeapon.transform.parent.gameObject.SetActive(true);
     }
 
     private void EquipNewWeapon()
