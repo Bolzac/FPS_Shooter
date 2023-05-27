@@ -29,6 +29,7 @@ public abstract class Weapon : MonoBehaviour
                 StartCoroutine(SingleFire(player));
                 break;
             case WeaponMode.AUTO:
+                AutoFire(player);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -59,9 +60,26 @@ public abstract class Weapon : MonoBehaviour
         _canFire = true;
     }
 
-    private void AutoFire()
+    private void AutoFire(Player player)
     {
-        
+        if(!_canFire) return;
+        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.layerIndex);
+        Debug.Log("a");
+        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit, range))
+        {
+            if (_raycastHit.rigidbody)
+            {
+                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * impactForce,_raycastHit.point,ForceMode.Impulse);
+            }
+        }
+
+        _canFire = false;
+        Invoke(nameof(ResetFire),fireRate);
+    }
+
+    private void ResetFire()
+    {
+        _canFire = true;
     }
 }
 

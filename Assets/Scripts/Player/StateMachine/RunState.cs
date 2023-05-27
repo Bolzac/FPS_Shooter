@@ -23,6 +23,7 @@ public class RunState  : State<Player>
         else if(!Runner.inputHandler.runFlag) Runner.stateManager.SetState(typeof(WalkState));
         else if(!Runner.inputHandler.moveFlag) Runner.stateManager.SetState(typeof(IdleState));
         else if(Runner.inputHandler.jumpFlag) Runner.stateManager.SetState(typeof(JumpState));
+        else if(Runner.inputHandler.mouseLeftClick || Runner.inputHandler.mouseRightClick) Runner.stateManager.SetState(typeof(WalkState));
     }
 
     public override void Update()

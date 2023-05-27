@@ -28,7 +28,8 @@ public class WalkState : State<Player>
         {
             Runner.stateManager.SetState(typeof(CrouchWalkState));
             Runner.StartCoroutine(Runner.playerController.CrouchHandler.Crouch());
-        }
+        }else if(Runner.inputHandler.mouseLeftClick) Runner.playerModel.weaponVariables.currentWeapon.LeftClickAction(Runner);
+        else if(Runner.inputHandler.mouseRightClick) Runner.playerModel.weaponVariables.currentWeapon.RightClickAction(Runner);
     }
 
     public override void Update()
