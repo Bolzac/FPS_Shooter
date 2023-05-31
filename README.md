@@ -68,3 +68,6 @@ CaptureInput stands for detecting inputs. When specific input is triggered, it d
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/2d6758b5-4014-425b-8401-3d7241a444e1)
 
 In update, script is calling specific functions. I want the player can detect interaction while is on idle state, it can.
+
+For downloading the package
+https://drive.google.com/file/d/15M-Co8Z5Lv5XpVX5LnK5GVj-E9IH4oKd/view?usp=sharing
