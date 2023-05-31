@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Health
 {
-    [Range(0,100)] public float maxHealth;
-    [Range(0,100)] public float currentHealth;
+    public float maxHealth;
+    public float currentHealth;
+    public bool isAlive = true;
 }

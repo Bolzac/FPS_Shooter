@@ -1,5 +1,5 @@
 using UnityEngine;
-public class StaminaHandler : Handler<Player>
+public class StaminaHandler : BaseController<Player>
 {
     private float _timer;
 
@@ -10,13 +10,13 @@ public class StaminaHandler : Handler<Player>
     
     public void DecreaseStamina()
     {
-        if (runner.playerModel.stamina.currentStamina > 0)
+        if (Runner.playerModel.stamina.currentStamina > 0)
         {
             _timer += Time.deltaTime;
             if (_timer >= 1)
             {
                 _timer = 0;
-                runner.playerModel.stamina.currentStamina -= runner.playerModel.stamina.decreaseAmount;
+                Runner.playerModel.stamina.currentStamina -= Runner.playerModel.stamina.decreaseAmount;
                 SetStamina();
             }
         }
@@ -24,13 +24,13 @@ public class StaminaHandler : Handler<Player>
 
     public void IncreaseStamina()
     {
-        if (runner.playerModel.stamina.maximumStamina > runner.playerModel.stamina.currentStamina)
+        if (Runner.playerModel.stamina.maximumStamina > Runner.playerModel.stamina.currentStamina)
         {
             _timer += Time.deltaTime;
             if (_timer >= 1)
             {
                 _timer = 0;
-                runner.playerModel.stamina.currentStamina += runner.playerModel.stamina.increaseAmount;
+                Runner.playerModel.stamina.currentStamina += Runner.playerModel.stamina.increaseAmount;
                 SetStamina();
             }
         }
@@ -38,6 +38,6 @@ public class StaminaHandler : Handler<Player>
 
     private void SetStamina()
     {
-        runner.playerModel.stamina.currentStamina = Mathf.Clamp(runner.playerModel.stamina.currentStamina, 0, runner.playerModel.stamina.maximumStamina);
+        Runner.playerModel.stamina.currentStamina = Mathf.Clamp(Runner.playerModel.stamina.currentStamina, 0, Runner.playerModel.stamina.maximumStamina);
     }
 }

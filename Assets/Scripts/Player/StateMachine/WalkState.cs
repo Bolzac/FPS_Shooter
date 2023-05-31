@@ -12,7 +12,7 @@ public class WalkState : State<Player>
     public override void Enter()
     {
         base.Enter();
-        Runner.animationManager.PlayTargetAnimation("Walk",Runner.playerModel.weaponVariables.currentWeapon.layerIndex);
+        Runner.animationManager.PlayTargetAnimation("Walk",Runner.playerModel.weaponVariables.currentWeapon.weaponModel.layerIndex);
         ChooseAndPlaySound();
         Runner.StartCoroutine(Runner.soundManager.PlayBreathing());
     }

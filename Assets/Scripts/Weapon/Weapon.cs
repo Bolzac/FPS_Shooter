@@ -3,28 +3,20 @@ using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    public string weaponName;
-    public string description;
-    public int layerIndex;
-    [SerializeField] protected WeaponMode weaponMode;
 
     private RaycastHit _raycastHit;
     private float _timer;
-
-    [SerializeField] private float impactForce;
-    [SerializeField] private float damage;
-    [SerializeField] private float range;
-    [SerializeField] private float fireRate;
     private bool _canFire = true;
-    [SerializeField] private Sound weaponSound;
-    [SerializeField] private ParticleSystem particle;
+
+    public WeaponModel weaponModel;
+    public ParticleSystem particle;
 
     // ReSharper disable Unity.PerformanceAnalysis
     public virtual void LeftClickAction(Player player)
     {
-        switch (weaponMode)
+        switch (weaponModel.weaponMode)
         {
             case WeaponMode.SINGLE:
                 StartCoroutine(SingleFire(player));
@@ -48,7 +40,7 @@ public abstract class Weapon : MonoBehaviour
         yield return new WaitUntil(() =>
         {
             _timer += Time.deltaTime;
-            return !player.inputHandler.mouseLeftClick && _timer >= fireRate;
+            return !player.inputHandler.mouseLeftClick && _timer >= weaponModel.fireRate;
         });
         _timer = 0;
         _canFire = true;
@@ -61,7 +53,7 @@ public abstract class Weapon : MonoBehaviour
         AnimateAndRaycast(player);
 
         _canFire = false;
-        Invoke(nameof(ResetFire),fireRate);
+        Invoke(nameof(ResetFire),weaponModel.fireRate);
     }
 
     private void ResetFire()
@@ -82,15 +74,19 @@ public abstract class Weapon : MonoBehaviour
 
     private void AnimateAndRaycast(Player player)
     {
-        player.soundManager.PlayTargetAudio(player.playerModel.weaponVariables.currentWeapon.weaponSound,player.playerModel.weaponVariables.source);
-        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.layerIndex);
-        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit, range))
+        player.soundManager.PlayTargetAudio(weaponModel.weaponSound,player.playerModel.weaponVariables.source);
+        player.animationManager.PlayTargetAnimation("Fire",player.playerModel.weaponVariables.currentWeapon.weaponModel.layerIndex);
+        particle.Play(true);
+        if (Physics.Raycast(player.cam.transform.position, player.cam.transform.forward, out _raycastHit, weaponModel.range))
         {
-            CreateAndDesDetectObjectType(player.playerModel.impacts);
-            MakeNoiseOnShot(player);
-            if (_raycastHit.rigidbody)
+            if (_raycastHit.transform.CompareTag("Enemy"))
             {
-                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * impactForce,_raycastHit.point,ForceMode.Impulse);
+                _raycastHit.transform.GetComponent<Enemy>().enemyController.HealthController.TakeDamage(weaponModel.damage);
+            }else if (_raycastHit.rigidbody)
+            {
+                CreateAndDesDetectObjectType(player.playerModel.impacts);
+                MakeNoiseOnShot(player);
+                _raycastHit.rigidbody.AddForceAtPosition(player.cam.transform.forward * weaponModel.impactForce,_raycastHit.point,ForceMode.Impulse);
             }
         }
     }

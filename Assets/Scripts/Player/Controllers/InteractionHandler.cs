@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class InteractionHandler : Handler<Player>
+public class InteractionHandler : BaseController<Player>
 {
     public InteractionHandler(Player player) : base(player)
     {
@@ -10,11 +6,11 @@ public class InteractionHandler : Handler<Player>
 
     public void HandleInteraction()
     {
-        if (runner.playerModel.InteractionObj.HasValue)
+        if (Runner.playerModel.InteractionObj.HasValue)
         {
-            if (runner.playerModel.InteractionObj.Value.transform.CompareTag("Weapon"))
+            if (Runner.playerModel.InteractionObj.Value.transform.CompareTag("Weapon"))
             {
-                runner.playerController.WeaponController.TakeWeapon(runner.playerModel.InteractionObj.Value.transform);
+                Runner.playerController.WeaponController.TakeWeapon(Runner.playerModel.InteractionObj.Value.transform);
             }
         }
     }

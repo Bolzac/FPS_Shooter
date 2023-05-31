@@ -22,7 +22,6 @@ public class Impacts
             if (!ImpactsByName.ContainsKey(names[i]))
             {
                 ImpactsByName.Add(names[i],impacts[i]);
-                Debug.Log(names[i] + "==" +impacts[i]);
             }
             if (!SoundsByName.ContainsKey(names[i]))
             {

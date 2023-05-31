@@ -13,7 +13,7 @@ public class IdleState : State<Player>
     public override void Enter()
     {
         base.Enter();
-        Runner.animationManager.PlayTargetAnimation("Idle",Runner.playerModel.weaponVariables.currentWeapon.layerIndex);
+        Runner.animationManager.PlayTargetAnimation("Idle",Runner.playerModel.weaponVariables.currentWeapon.weaponModel.layerIndex);
         Runner.StartCoroutine(Runner.soundManager.PlayBreathing());
     }
 

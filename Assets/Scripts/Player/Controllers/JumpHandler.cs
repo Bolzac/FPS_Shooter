@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class JumpHandler : Handler<Player>
+public class JumpHandler : BaseController<Player>
 {
     private Vector3 _jumpDirection;
 
@@ -10,7 +10,7 @@ public class JumpHandler : Handler<Player>
 
     public void HandleJump()
     {
-        _jumpDirection = runner.transform.up * runner.playerModel.jumpForce;
-        runner.playerModel.rb.AddForce(_jumpDirection,ForceMode.Impulse);
+        _jumpDirection = Runner.transform.up * Runner.playerModel.jumpForce;
+        Runner.playerModel.rb.AddForce(_jumpDirection,ForceMode.Impulse);
     }
 }
