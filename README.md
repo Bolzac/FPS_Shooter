@@ -6,7 +6,7 @@ All audios are from https://freesound.org/.
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/f2b8a6f4-1814-4688-833b-3ca708c48dcc)
 
 Above picture shows that all the components that my character has. Player contains all of the component classes. It allows other classes to reach all of the scripts.
-##Player Controller
+## Player Controller
 In player controller, there are regular classes to handle specified actions.
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/db395e62-bbcb-4ae7-a190-9210f6715201)
@@ -20,7 +20,7 @@ Base controller send player variable to all controllers.
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/b25ea670-5133-4665-a45b-1feb414048cd)
 
 In construction, I assign this parameter to Runner variable. It allows all scripts can reach player variables. For example, in “HandleMovement” class you need to assign some variables like speed. We can create these variables in same script but it prevents customization and seperate all the variables. It is easier to alter variables from one source like “PlayerModel” component.
-##Player Model
+## Player Model
 PlayerModel stands for to contain all of the data like speed, health, sounds etc.
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/e80a7d8c-6e17-457b-908c-d8688127d389)
@@ -29,18 +29,18 @@ All of the other objects can reach these variables. Anyone who is a designer can
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/7f7c828e-09e6-44db-a83e-7ec2042bf625)
 
-##Player View
+## Player View
 Player view contains all of the view scripts for ground detection and interaction detection.
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/63012924-7468-4a28-b2c3-b8a655b77618)
 
 View is a base class like “BaseController” class. Player view contains all specified classes. GroundView stands for detecting ground with raycast. Whenever the raycast return nothing, it changes a variable in PlayerModel named “isOnGround”. Whenever the isOnGround variable is changed, it changes the state of player to fallState.
-##Input Handler
+## Input Handler
 Input handler stands for detection of inputs. In project, new input systems are used. When player send any input, it detects and assign variables. These leads to specified actions and change the state of player.
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/10cb0666-2750-4005-a306-69b342055f6d)
 
-##State Manager
+## State Manager
 
 ![image](https://github.com/Bolzac/FPS_Shooter/assets/70448242/08923bf1-8e71-43ae-8a4c-cae298c8be28)
 
