@@ -1,4 +1,5 @@
 # First Person Player Controller For Unity
+video: https://www.linkedin.com/posts/emirhankarakadioglu_gamedevelopment-unity-activity-7070009289364373505-bJAX?utm_source=share&utm_medium=member_desktop
 Assets folder contains all of the scripts, audios, animations, models, particles for player. I tried to use MVC and State Machine patterns for my player script. All the audios and animations are placeholders. You can change it any time for usage.
 Animations and models are from https://www.mixamo.com/
 All audios are from https://freesound.org/.
